@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="NavbarFooter.master.cs" Inherits="MyHome.Views.MasterPage.NavbarFooter" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>
+        MyHome
+    </title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="nav">
+
+        </div>
+        <div class="content">
+            <asp:ContentPlaceHolder ID="contentBody" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div class="footer">
+
+        </div>
+    </form>
+</body>
+</html>

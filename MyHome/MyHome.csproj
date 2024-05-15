@@ -43,7 +43,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -71,19 +79,172 @@
     <Content Include="App_Data\DB_log.ldf">
       <DependentUpon>DB.mdf</DependentUpon>
     </Content>
+    <Content Include="Model\DBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\DBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+      <LastGenOutput>DBModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Style\Style.css" />
+    <Content Include="Views\WebForm\Customer\ChatPage.aspx" />
+    <Content Include="Views\WebForm\Customer\EditProfilePage.aspx" />
+    <Content Include="Views\WebForm\Customer\OrderPage.aspx" />
+    <Content Include="Views\WebForm\Customer\ProfilePage.aspx" />
+    <Content Include="Views\WebForm\Customer\ProjectCatalogPage.aspx" />
+    <Content Include="Views\WebForm\Guest\LoginPage.aspx" />
+    <Content Include="Views\WebForm\Guest\RegisterPage.aspx" />
+    <Content Include="Views\WebForm\Worker\CreateProjectPage.aspx" />
+    <Content Include="Views\WebForm\Worker\EditProjectPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\MessageController.cs" />
+    <Compile Include="Controller\OrderController.cs" />
+    <Compile Include="Controller\ProjectController.cs" />
+    <Compile Include="Controller\ReviewController.cs" />
+    <Compile Include="Controller\UserController.cs" />
+    <Compile Include="Factory\MessageFactory.cs" />
+    <Compile Include="Factory\OrderFactory.cs" />
+    <Compile Include="Factory\ProjectFactory.cs" />
+    <Compile Include="Factory\ReviewFactory.cs" />
+    <Compile Include="Factory\UserFactory.cs" />
+    <Compile Include="Handler\MessageHandler.cs" />
+    <Compile Include="Handler\OrderHandler.cs" />
+    <Compile Include="Handler\ProjectHandler.cs" />
+    <Compile Include="Handler\ReviewHandler.cs" />
+    <Compile Include="Handler\UserHandler.cs" />
+    <Compile Include="Model\DBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Message.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Order.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Project.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Review.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\User.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\DatabaseSingleton.cs" />
+    <Compile Include="Repository\MessageRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Repository\ProjectRepository.cs" />
+    <Compile Include="Repository\ReviewRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Views\MasterPage\NavbarFooter.Master.cs">
+      <DependentUpon>NavbarFooter.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\MasterPage\NavbarFooter.Master.designer.cs">
+      <DependentUpon>NavbarFooter.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebForm\Customer\ChatPage.aspx.cs">
+      <DependentUpon>ChatPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WebForm\Customer\ChatPage.aspx.designer.cs">
+      <DependentUpon>ChatPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebForm\Customer\EditProfilePage.aspx.cs">
+      <DependentUpon>EditProfilePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WebForm\Customer\EditProfilePage.aspx.designer.cs">
+      <DependentUpon>EditProfilePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebForm\Customer\OrderPage.aspx.cs">
+      <DependentUpon>OrderPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WebForm\Customer\OrderPage.aspx.designer.cs">
+      <DependentUpon>OrderPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebForm\Customer\ProfilePage.aspx.cs">
+      <DependentUpon>ProfilePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WebForm\Customer\ProfilePage.aspx.designer.cs">
+      <DependentUpon>ProfilePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebForm\Customer\ProjectCatalogPage.aspx.cs">
+      <DependentUpon>ProjectCatalogPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WebForm\Customer\ProjectCatalogPage.aspx.designer.cs">
+      <DependentUpon>ProjectCatalogPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebForm\Guest\LoginPage.aspx.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WebForm\Guest\LoginPage.aspx.designer.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebForm\Guest\RegisterPage.aspx.cs">
+      <DependentUpon>RegisterPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WebForm\Guest\RegisterPage.aspx.designer.cs">
+      <DependentUpon>RegisterPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebForm\Worker\CreateProjectPage.aspx.cs">
+      <DependentUpon>CreateProjectPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WebForm\Worker\CreateProjectPage.aspx.designer.cs">
+      <DependentUpon>CreateProjectPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebForm\Worker\EditProjectPage.aspx.cs">
+      <DependentUpon>EditProjectPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\WebForm\Worker\EditProjectPage.aspx.designer.cs">
+      <DependentUpon>EditProjectPage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Model\DBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model\DBModel.edmx.diagram">
+      <DependentUpon>DBModel.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
+    <Content Include="Views\MasterPage\NavbarFooter.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
